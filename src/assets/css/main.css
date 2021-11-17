@@ -98,6 +98,9 @@ h4 {
   border: 2px solid #c51abb;
   background-color: transparent;
 }
+.status {
+  text-align: center;
+}
 .fixed-gift {
   position: fixed;
   z-index: 19;
