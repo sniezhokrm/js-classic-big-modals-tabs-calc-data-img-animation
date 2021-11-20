@@ -1,3 +1,4 @@
+import {postData} from '../services/request';
 
 const forms = () => {
     const form = document.querySelectorAll('form'),
@@ -18,15 +19,6 @@ const forms = () => {
         question: 'assets/question.php'
     };
 
-    const postData = async (url, data) => {
-        let res = await fetch(url, {
-            method: "POST",
-            body: data
-        });
-
-        return await res.text();
-    };
-
     const clearInputs = () => {
         inputs.forEach(item => {
             item.value = '';
@@ -38,7 +30,6 @@ const forms = () => {
 
     upload.forEach(item => {
         item.addEventListener('input', () => {
-            console.log(item.files[0]);
             let dots;
             const arr = item.files[0].name.split('.');
 
@@ -73,11 +64,9 @@ const forms = () => {
             const formData = new FormData(item);
             let api;
             item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.question;
-            console.log(api);
 
             postData(api, formData)
                 .then(res => {
-                    console.log(res);
                     statusImg.setAttribute('src', message.ok);
                     textMessage.textContent = message.success;
                 })
