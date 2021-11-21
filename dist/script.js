@@ -1,6 +1,47 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/modules/accordion.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/accordion.js ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const accordion = triggersSelector => {
+  const btns = document.querySelectorAll(triggersSelector);
+  btns.forEach(btn => {
+    btn.addEventListener('click', function () {
+      this.classList.toggle('active-style');
+      this.nextElementSibling.classList.toggle('active-content');
+
+      if (this.classList.contains('active-style')) {
+        this.nextElementSibling.style.maxHeight = this.nextElementSibling.scrollHeight + 80 + "px";
+      } else {
+        this.nextElementSibling.style.maxHeight = '0px';
+      }
+    });
+  }); //   blocks = document.querySelectorAll(itemsSelector);
+  // blocks.forEach(block => {
+  //     block.classList.add('animated', 'fadeInDown');
+  // });
+  // btns.forEach(btn => {
+  //     btn.addEventListener('click', function() {
+  //         if (!this.classList.contains('active')) {
+  //             btns.forEach(btn => {
+  //                 btn.classList.remove('active', 'active-style');
+  //             });
+  //             this.classList.add('active', 'active-style');
+  //         }
+  //     });
+  // });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (accordion);
+
+/***/ }),
+
 /***/ "./src/js/modules/calc.js":
 /*!********************************!*\
   !*** ./src/js/modules/calc.js ***!
@@ -98,9 +139,9 @@ const filter = () => {
     }
   };
 
-  function cLickBtn(elem) {
-    let btn = menu.querySelector(elem),
-        mark = wrapper.querySelectorAll(elem);
+  function cLickBtn(selector) {
+    let btn = menu.querySelector(selector),
+        mark = wrapper.querySelectorAll(selector);
     btn.addEventListener('click', () => {
       typeFilter(mark);
     });
@@ -395,6 +436,49 @@ const modals = state => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modals);
+
+/***/ }),
+
+/***/ "./src/js/modules/pictureSize.js":
+/*!***************************************!*\
+  !*** ./src/js/modules/pictureSize.js ***!
+  \***************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const pictureSize = imgSelector => {
+  const blocks = document.querySelectorAll(imgSelector);
+
+  function showImg(block) {
+    let img = block.querySelector('img'); // something.png => something-1.png
+
+    img.src = img.src.slice(0, -4) + '-1.png';
+    block.querySelectorAll('p:not(.sizes-hit)').forEach(p => {
+      p.style.display = 'none';
+    });
+  }
+
+  function hideImg(block) {
+    let img = block.querySelector('img'); // something-1.png => something.png
+
+    img.src = img.src.slice(0, -6) + '.png';
+    block.querySelectorAll('p:not(.sizes-hit)').forEach(p => {
+      p.style.display = 'block';
+    });
+  }
+
+  blocks.forEach(block => {
+    block.addEventListener('mouseover', () => {
+      showImg(block);
+    });
+    block.addEventListener('mouseout', () => {
+      hideImg(block);
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (pictureSize);
 
 /***/ }),
 
@@ -2296,6 +2380,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/showMoreStyles */ "./src/js/modules/showMoreStyles.js");
 /* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
 /* harmony import */ var _modules_filter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/filter */ "./src/js/modules/filter.js");
+/* harmony import */ var _modules_pictureSize__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/pictureSize */ "./src/js/modules/pictureSize.js");
+/* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
+
+
 
 
 
@@ -2317,6 +2405,8 @@ window.addEventListener('DOMContentLoaded', () => {
   (0,_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__["default"])('.button-styles', '#styles .row');
   (0,_modules_calc__WEBPACK_IMPORTED_MODULE_6__["default"])('#size', '#material', '#options', '.promocode', '.calc-price');
   (0,_modules_filter__WEBPACK_IMPORTED_MODULE_7__["default"])();
+  (0,_modules_pictureSize__WEBPACK_IMPORTED_MODULE_8__["default"])('.sizes-block');
+  (0,_modules_accordion__WEBPACK_IMPORTED_MODULE_9__["default"])('.accordion-heading');
 });
 }();
 /******/ })()

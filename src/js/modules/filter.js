@@ -28,9 +28,9 @@ const filter = () => {
     }
   };
 
-  function cLickBtn(elem) {
-    let btn = menu.querySelector(elem),
-      mark = wrapper.querySelectorAll(elem);
+  function cLickBtn(selector) {
+    let btn = menu.querySelector(selector),
+      mark = wrapper.querySelectorAll(selector);
     btn.addEventListener('click', () => {
       typeFilter(mark);
     });
