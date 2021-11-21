@@ -30,6 +30,7 @@ const forms = () => {
 
     upload.forEach(item => {
         item.addEventListener('input', () => {
+            console.log(item.files[0]);
             let dots;
             const arr = item.files[0].name.split('.');
 
@@ -64,9 +65,10 @@ const forms = () => {
             const formData = new FormData(item);
             let api;
             item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.question;
-
+          
             postData(api, formData)
                 .then(res => {
+                    console.log(res);
                     statusImg.setAttribute('src', message.ok);
                     textMessage.textContent = message.success;
                 })
