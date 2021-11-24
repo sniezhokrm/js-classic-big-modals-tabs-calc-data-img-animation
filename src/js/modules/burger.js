@@ -18,7 +18,6 @@ const burger = (btnBurgerSelector, menuBurgerSelector) => {
     }
   });
 
-  s
 };
 
 export default burger;
